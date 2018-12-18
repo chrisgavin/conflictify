@@ -1,0 +1,22 @@
+language: "python"
+python:
+  - "3.5"
+  - "3.6"
+
+script:
+  - pip install .[dev]
+  - mypy -p conflictify
+  - pytest
+
+deploy:
+  provider: pypi
+  skip_existing: true
+  user: chrisgavin
+  password:
+    secure: "yLmsgNPlTteP31oxqFntHrGqpMD42eQmAymxhQOZ41b0R3Lcz1BMMZzvqxukAsrp1eu25Cdm2Jw13mYWJEgKFwiR6l/dw1XPzzhJaNbxWw8amhpko93fBBdskuN2a0YOPsD59ekBXYbeEGbgcomb/2/I41GrQKZ3NqCM/pw0dBoFNAqG3yvs5ouP4kp5a9+jFN6olK0rQ/4BCDLkZano5h4XPcwM+xbSriF5NRHuzF4DGARNazNQD58fO1PfucR2kKr+Fg0C+4V1o79Vq+uhDCDn2NP1NAOGtc+j4tXuzn/Z6QQ+XMHjmW4cmYZ3DaNb4fWEqgwB4xkR98lseVArwY28EvE34z/11zUxxVqngw6o7OUIe3CtdB9tcIPpa4rGS1gazLlSYMbD2d1rZZHEIS6ZmTz/0ASJR30vhdAF3C/24v2s6QKPeBwqPVHOzXMBlQTxDbbVh/w1ROOqjx9bm2V3UxHrG8vMvyZsFZMwlFvdBbxuC2Y/F7OKFg0yK3fyRBK1SHxx3jeCEqk448Pyp/XdQjx2iIVEKiHW4bqjDFT1NTQ+DeeHuZunb67mYUe7+f43VyKQV99bY7hrQt9kGTAcPR23AIFvgp8rjIQ7W3MpsH6USnUJCV5oqgZax0xmyUomQRfWTafHKzZduO7rIxQMMvpIpQnQCeBYsiJTUcs="
+  on:
+    tags: true
+
+notifications:
+  slack:
+    secure: "Er9jPMpgNhDwDhp8j7Ehpm9WfkNihCyHS8LaS6EbIIX0nA77FtVkjozpSLFlKBhOgXKJsfw6LM7uLLw9APjv3Ypr8XljbTamLX+3Du8FHq5XdH9ODo6zXYkVJhOy6m0ZEmnxFD8Jesn5CBy2ld9HgTdaS/r2kUjEhfAG8Tl1wu7vvYLGmZe+z8YBU14CVNym/8VX02VD/Vn0qrbckgEnEr0ThkN8kCCispct9pcceN5v2cju1+eR8aNF0rz23kHcicogQjAWzYi4m3hVhbnjB52pb2bSQg6OCvo2uc7tftydNwD5q2ta8oV+HjIYJW1hilywX5p515C33D5hZQ+kGdQpukDzkngDRRw+4ifnq391tzLhd4U70Vf4evYIvBFdB6UL2r++SnSoiguAK37CE9nRo4r8RHB75wJTdOCJJcRXJffcQxfEeI1VH0SSAwZwuzt992Y4Mynap95wEiF0dwSpuEIKBMqQF2nVBDpf8uhP+uvDXrB6UKdFwbp3o9Ijqyq+F0Xdrd5wol0zZBHhmL+mkpROlI/0UqZB7g2EOLY/7zQfV31JB+kp+Jlq9RbSajs3oPoh/LQ2eqtWMjAV43tHsvSxVbDYwrZx4VvGRNIaganTxUPdrRzEc7FmLQOMwdfSCUnJfZ/tt5r6X6R5W7sZOmfymD0bcRpgKYM3aZs="
