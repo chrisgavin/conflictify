@@ -55,3 +55,15 @@ def test_changed_in_both_no_conflicts():
 		"changed-in-both-no-conflicts",
 		[],
 	)
+
+def test_multiple_text_conflicts():
+	do_test(
+		"multiple-text-conflicts",
+		[
+			{
+				conflictify.FilePathSource.MERGE_BASE: conflictify.ConflictingFile(conflictify.FilePathSource.MERGE_BASE, 100644, "79f2ceb73ab1eb39320ae43949f5c369097db110", pathlib.Path("multiple-conflicts.txt")),
+				conflictify.FilePathSource.BASE: conflictify.ConflictingFile(conflictify.FilePathSource.BASE, 100644, "a5ffa68466d6c2b05cd92211ad713da8d447aed8", pathlib.Path("multiple-conflicts.txt")),
+				conflictify.FilePathSource.HEAD: conflictify.ConflictingFile(conflictify.FilePathSource.HEAD, 100644, "1d2390cf5cdf266332cdd647383a7dd8dd5d49ff", pathlib.Path("multiple-conflicts.txt")),
+			},
+		],
+	)
