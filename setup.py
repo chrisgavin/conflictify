@@ -8,7 +8,7 @@ def main():
 		raise SystemExit("conflictify requires at least Python 3.5.")
 	setuptools.setup(
 		name="conflictify",
-		version="1.0.0",
+		version="1.0.1",
 		description="A Python module for identifying which files have merge conflicts between two branches in a Git checkout.",
 		url="https://github.com/chrisgavin/conflictify/",
 		packages=["conflictify"],
