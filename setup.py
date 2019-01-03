@@ -10,7 +10,7 @@ def main():
 		name="conflictify",
 		version="1.0.0",
 		description="A Python module for identifying which files have merge conflicts between two branches in a Git checkout.",
-		url="https://gitlab.com/chrisgavin/conflictify/",
+		url="https://github.com/chrisgavin/conflictify/",
 		packages=["conflictify"],
 		python_requires=">=3.5",
 		classifiers=[
