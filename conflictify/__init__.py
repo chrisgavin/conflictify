@@ -44,8 +44,7 @@ def find_conflicting_files(checkout_path:pathlib.Path, base_branch:str, head_bra
 				result += [conflict]
 				conflict = None
 		if attempted_merge_lines[i].startswith("+<<<<<<<"):
-			if not conflict:
-				raise Exception("Unexpected merge conflict marker.")
-			result += [conflict]
-			conflict = None
+			if conflict is not None:
+				result += [conflict]
+				conflict = None
 	return result
