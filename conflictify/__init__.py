@@ -33,11 +33,19 @@ def find_conflicting_files(checkout_path:pathlib.Path, base_branch:str, head_bra
 	merge_base = subprocess.check_output(["git", "merge-base", base_branch, head_branch], cwd=str(checkout_path)).strip()
 	attempted_merge = subprocess.check_output(["git", "merge-tree", merge_base, base_branch, head_branch], cwd=str(checkout_path)).decode("utf-8")
 	attempted_merge_lines = attempted_merge.split("\n")
+	conflict = None # type: typing.Optional[typing.Dict[FilePathSource, ConflictingFile]]
 	for i in range(0, len(attempted_merge_lines)):
 		if attempted_merge_lines[i] == "changed in both":
 			conflict = {}
 			for delta in range(1, len(FilePathSource) + 1):
 				conflicting_file = ConflictingFile.parse(attempted_merge_lines[i + delta])
 				conflict[conflicting_file.source] = conflicting_file
+			if len(attempted_merge_lines) < len(FilePathSource) + 1 or not attempted_merge_lines[len(FilePathSource) + 1].startswith("@@"):
+				result += [conflict]
+				conflict = None
+		if attempted_merge_lines[i].startswith("+<<<<<<<"):
+			if not conflict:
+				raise Exception("Unexpected merge conflict marker.")
 			result += [conflict]
+			conflict = None
 	return result

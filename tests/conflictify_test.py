@@ -49,3 +49,9 @@ def test_submodule():
 			},
 		],
 	)
+
+def test_changed_in_both_no_conflicts():
+	do_test(
+		"changed-in-both-no-conflicts",
+		[],
+	)
