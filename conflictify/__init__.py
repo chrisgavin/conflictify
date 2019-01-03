@@ -40,7 +40,8 @@ def find_conflicting_files(checkout_path:pathlib.Path, base_branch:str, head_bra
 			for delta in range(1, len(FilePathSource) + 1):
 				conflicting_file = ConflictingFile.parse(attempted_merge_lines[i + delta])
 				conflict[conflicting_file.source] = conflicting_file
-			if len(attempted_merge_lines) < len(FilePathSource) + 1 or not attempted_merge_lines[len(FilePathSource) + 1].startswith("@@"):
+			text_diff_line_index = i + len(FilePathSource) + 1
+			if len(attempted_merge_lines) < text_diff_line_index or not attempted_merge_lines[text_diff_line_index].startswith("@@"):
 				result += [conflict]
 				conflict = None
 		if attempted_merge_lines[i].startswith("+<<<<<<<"):
