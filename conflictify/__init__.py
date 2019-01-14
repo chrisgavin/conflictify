@@ -14,6 +14,7 @@ class ConflictingFile():
 		self.mode = mode
 		self.sha1 = sha1
 		self.path = path
+		self.text_conflict_count = 0
 
 	@classmethod
 	def parse(cls, line:str) -> "ConflictingFile":
@@ -31,7 +32,7 @@ class ConflictingFile():
 def find_conflicting_files(checkout_path:pathlib.Path, base_branch:str, head_branch:str) -> typing.List[typing.Dict[FilePathSource, ConflictingFile]]:
 	result = [] # type: typing.List[typing.Dict[FilePathSource, ConflictingFile]]
 	merge_base = subprocess.check_output(["git", "merge-base", base_branch, head_branch], cwd=str(checkout_path)).strip()
-	attempted_merge = subprocess.check_output(["git", "merge-tree", merge_base, base_branch, head_branch], cwd=str(checkout_path)).decode("utf-8")
+	attempted_merge = subprocess.check_output(["git", "merge-tree", merge_base, base_branch, head_branch], cwd=str(checkout_path)).decode("utf-8", "ignore")
 	attempted_merge_lines = attempted_merge.split("\n")
 	conflict = None # type: typing.Optional[typing.Dict[FilePathSource, ConflictingFile]]
 	for i in range(0, len(attempted_merge_lines)):

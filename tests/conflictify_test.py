@@ -38,6 +38,13 @@ def test_binary():
 		],
 	)
 
+def test_added_binary():
+	do_test(
+		"added-binary",
+		[
+		],
+	)
+
 def test_submodule():
 	do_test(
 		"submodule",
